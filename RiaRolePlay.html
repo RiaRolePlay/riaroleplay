@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RIA RP - Ролевой проект по Grand Theft Auto</title>
+    <style>
+        /* Основные стили */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+        
+        /* Шапка сайта */
+        header {
+            background-color: #1a1a1a;
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 3px solid #ff4500;
+        }
+        
+        .logo {
+            max-width: 200px;
+            margin-bottom: 10px;
+        }
+        
+        /* Навигационное меню */
+        nav {
+            background-color: #252525;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        nav li {
+            margin: 0 15px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover {
+            background-color: #ff4500;
+            color: white;
+        }
+        
+        /* Основной контейнер */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Герой-секция */
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://via.placeholder.com/1920x1080') no-repeat center center/cover;
+            margin-bottom: 40px;
+        }
+        
+        /* Заголовки */
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #ff4500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            margin: 40px 0 25px;
+            color: #ff4500;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100px;
+            height: 3px;
+            background-color: #ff4500;
+        }
+        
+        h3 {
+            font-size: 1.8rem;
+            color: #ff8c00;
+            margin: 20px 0 15px;
+        }
+        
+        /* Карточки особенностей */
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 40px 0;
+            gap: 20px;
+        }
+        
+        .feature {
+            flex: 1 1 300px;
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* Секция администрации */
+        .staff-section {
+            margin: 60px 0;
+        }
+        
+        .staff-categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .staff-category {
+            flex: 1 1 100%;
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .staff {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+.staff-member {
+            width: 280px;
+            background-color: #252525;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .staff-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+        }
+        
+        .staff-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 3px solid #ff4500;
+        }
+        
+        .rank {
+            color: #ff8c00;
+            font-weight: bold;
+            margin: 10px 0;
+            font-size: 1.1rem;
+        }
+        
+        /* Форум */
+        .forum-container {
+            background-color: #1e1e1e;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 40px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .forum-category {
+            margin-bottom: 40px;
+        }
+        
+        .forum-category h3 {
+            border-bottom: 2px solid #ff4500;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .forum-thread {
+            background-color: #252525;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .forum-thread:hover {
+            background-color: #2e2e2e;
+            transform: translateX(5px);
+        }
+        
+        .forum-thread a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+        
+        .forum-thread a:hover {
+            color: #ff8c00;
+        }
+        
+        .thread-info {
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-top: 10px;
+            display: flex;
+            gap: 15px;
+        }
+        
+        /* Таблица прав */
+        .permissions-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 40px 0;
+            background-color: #1e1e1e;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .permissions-table th, .permissions-table td {
+            border: 1px solid #444;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .permissions-table th {
+            background-color: #ff4500;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+        
+        .permissions-table tr:nth-child(even) {
+            background-color: #252525;
+        }
+        
+        .permissions-table tr:hover {
+            background-color: #2e2e2e;
+        }
+        
+        .permission-yes {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        
+        .permission-no {
+            color: #f44336;
+        }
+        
+        .permission-some {
+            color: #FFC107;
+            font-weight: bold;
+        }
+        
+        /* Правила форума */
+        .forum-rules {
+            background-color: #1e1e1e;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 40px 0;
+            border-left: 5px solid #ff4500;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .forum-rules h3 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #ff4500;
+        }
+        
+        .forum-rules ol {
+            padding-left: 20px;
+        }
+        
+        .forum-rules li {
+            margin-bottom: 15px;
+            padding-left: 10px;
+            line-height: 1.5;
+        }
+        
+        /* Кнопки */
+        .btn {
+            display: inline-block;
+            background-color: #ff4500;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            text-decoration: none;
+
+border-radius: 5px;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .btn:hover {
+            background-color: #ff6347;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+        }
+        
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+        
+        .btn-center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+            max-width: 300px;
+        }
+        
+        /* Скриншоты */
+        .screenshots {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin: 50px 0;
+        }
+        
+        .screenshot {
+            max-width: 100%;
+            width: 350px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .screenshot:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+        }
+        
+        /* Подвал */
+        footer {
+            background-color: #1a1a1a;
+            padding: 40px 0;
+            margin-top: 80px;
+            border-top: 1px solid #333;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #ff4500;
+        }
+        
+        .copyright {
+            color: #777;
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+        
+        /* Системные требования */
+        .requirements {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .requirement-card {
+            flex: 1 1 400px;
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .requirement-card h3 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .requirement-list {
+            list-style-type: none;
+        }
+        
+        .requirement-list li {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+            line-height: 1.5;
+        }
+        
+        .requirement-list li::before {
+            content: '•';
+            color: #ff4500;
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -5px;
+        }
+        
+        /* Вкладки */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            
+            .staff-member {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .permissions-table {
+                font-size: 0.8rem;
+            }
+
+.permissions-table th, .permissions-table td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        let a = "Переходя на сайт , Я подтверждаю что буду ознакомлен с всеми требованиями проекта";
+        alert(a);
+    </script>
+    <!-- Шапка сайта -->
+    <header>
+        <img src="ria.jpg" alt="Логотип RIA RP" class="logo">
+        <h1>RIA RP</h1>
+    </header>
+    
+    <!-- Навигационное меню -->
+    <nav>
+        <ul>
+            <li><a href="#" onclick="showTab('main')">Главная</a></li>
+            <li><a href="#" onclick="showTab('administration')">Администрация</a></li>
+            <li><a href="#" onclick="showTab('senior-admin')">Старшая Администрация</a></li>
+            
+            <li><a href="#" onclick="showTab('download')">Скачать</a></li>
+        </ul>
+    </nav>
+    
+    <!-- Главная вкладка -->
+    <div id="main" class="tab-content active">
+        <section class="hero">
+            <div class="container">
+                <h2>Добро пожаловать в RIA RP</h2>
+                <p>Лучший ролевой опыт в мире Grand Theft Auto</p>
+                <img src="ria2.jpg" alt="Логотип в стиле GTA" style="max-width: 200px; width: 100%; margin: 15px 0;">
+                <a href="#" onclick="showTab('download')" class="btn">Скачать сейчас</a>
+            </div>
+        </section>
+        
+        <section class="container">
+            <h2>О проекте RIA RP</h2>
+            <p>RIA RP - это революционная ролевая модификация для Grand Theft Auto, которая выводит игровой процесс на новый уровень реализма. Наш проект создает динамичный мир, где игроки могут создавать собственные истории и жить альтернативными жизнями - как в криминальном мире, так и в роли законопослушных граждан.</p>
+            
+            <h2>Наши преимущества</h2>
+            <div class="features">
+                <div class="feature">
+                    <h3>Реалистичная экономика</h3>
+                    <p>Тщательно сбалансированная экономическая система, где каждый заработанный доллар имеет значение. Уникальная система бизнесов, налогов и финансовых операций.</p>
+                </div>
+                <div class="feature">
+                    <h3>Продвинутый ролеплей</h3>
+                    <p>Уникальные системы для глубокого развития персонажа, интерактивного взаимодействия и реалистичного отыгрыша ролей. Более 100 различных анимаций.</p>
+                </div>
+                <div class="feature">
+                    <h3>Регулярные обновления</h3>
+                    <p>Постоянное развитие проекта с добавлением новых функций, исправлением ошибок и новым контентом. Еженедельные патчи и крупные обновления каждый месяц.</p>
+                </div>
+            </div>
+            
+            <h2>Ключевые особенности</h2>
+            <div class="features">
+                <div class="feature">
+                    <ul>
+                        <li>Кастомные профессии и система работы</li>
+                        <li>Реалистичная физика и управление транспортом</li>
+                        <li>Продвинутые системы для полиции и криминала</li>
+                    </ul>
+                </div>
+                <div class="feature">
+                    <ul>
+                        <li>Динамическая погода и смена дня/ночи</li>
+                        <li>Собственный бизнес и недвижимость</li>
+                        <li>Уникальные анимации и взаимодействия</li>
+                    </ul>
+                </div>
+                <div class="feature">
+                    <ul>
+                        <li>Активное и дружелюбное сообщество</li>
+                        <li>Система навыков и развития персонажа</li>
+                        <li>Реалистичная система повреждений</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h2>Скриншоты</h2>
+            <div class="screenshots">
+                <img src="ria2.jpg" alt="Скриншот RIA RP 1" class="screenshot">
+                <img src="ria3.jpg" alt="Скриншот RIA RP 2" class="screenshot">
+                <!-- Добавьте больше скриншотов по мере необходимости -->
+            </div>
+        </section>
+    </div>
+    
+    <!-- Вкладка Администрации -->
+    <div id="administration" class="tab-content">
+        <section class="container">
+            <h2>Состав Администрации проекта</h2>
+            <p>Наша команда администраторов работает круглосуточно, чтобы обеспечить комфортную игру для всех участников проекта.</p>
+            
+            <div class="staff-section">
+                <h3>Основная администрация</h3>
+                <div class="staff">
+                    <div class="staff-member">
+                        <img src="https://via.placeholder.com/150" alt="Главный Администратор">
+                        <h3></h3>
+                        <div class="rank">Главный Администратор</div>
+                        <p>Отвечает за техническую часть проекта и работу команды. Контролирует все процессы на сервере.</p>
+                    </div>
+                    
+                    <div class="staff-member">
+                        <img src="https://via.placeholder.com/150" alt="Администратор">
+                        <h3></h3>
+                        <div class="rank">Администратор</div>
+                        <p>Курирует игровые процессы и разрешает спорные ситуации. Проводит проверки игроков.</p>
+                    </div>
+                    
+                    <div class="staff-member">
+                        <img src="https://via.placeholder.com/150" alt="Администратор">
+                        <h3></h3>
+                        <div class="rank">Администратор</div>
+                        <p>Занимается организацией ивентов и поддержанием ролевого уровня. Ведущий мероприятий.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="staff-section">
+                <h3>Модерация</h3>
+                <div class="staff">
+                    <div class="staff-member">
+                        <img src="https://via.placeholder.com/150" alt="Главный модератор">
+                        <h3></h3>
+                        <div class="rank">Главный модератор</div>
+                        <p>Руководит командой модераторов, проводит обучение и распределяет задачи.</p>
+                    </div>
+                    
+                    <div class="staff-member">
+                        <img src="https://via.placeholder.com/150" alt="Старший модератор">
+                        <h3></h3>
+                        <div class="rank">Старший модератор</div>
+                        <p>Контролирует работу модераторов, принимает жалобы от игроков.</p>
+                    </div>
+                    
+                    <div class="staff-member">
+                        <img src="https://via.placeholder.com/150" alt="Модератор">
+                        <h3></h3>
+                        <div class="rank">Модератор</div>
+                        <p>Следит за порядком в чатах, проверяет соблюдение правил сервера.</p>
+                    </div>
+                    
+                    <div class="staff-member">
+                        <img src="https://via.placeholder.com/150" alt="Младший модератор">
+                        <h3></h3>
+                        <div class="rank">Младший модератор</div>
+                        <p>Помогает основным модераторам, обучается тонкостям работы.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="staff-section">
+                <h3>Игровые лидеры</h3>
+                <div class="staff">
+                    <div class="staff-member">
+                        <img src="https://via.placeholder.com/150" alt="Лидер">
+                        <h3></h3>
+                        <div class="rank">Лидер</div>
+                        <p>Руководит одной из основных игровых группировок, организует RP-процессы.</p>
+
+</div>
+                    
+                    <div class="staff-member">
+                        <img src="https://via.placeholder.com/150" alt="Зам Лидера">
+                        <h3></h3>
+                        <div class="rank">Зам Лидера</div>
+                        <p>Помощник лидера, заменяет его в случае отсутствия, курирует новых членов.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Вкладка Старшей Администрации -->
+    <div id="senior-admin" class="tab-content">
+        <section class="container">
+            <h2>Старшая Администрация проекта</h2>
+            <p>Эти люди стоят у истоков проекта и принимают ключевые решения по его развитию.</p>
+            
+            <div class="staff">
+                <div class="staff-member">
+                    <img src="https://via.placeholder.com/150" alt="Основатель">
+                    <h3>Daniil , Konstantin</h3>
+                    <div class="rank">Основатель проекта</div>
+                    <p>Идейный вдохновитель и главный разработчик RIA RP. Принимает стратегические решения.</p>
+                </div>
+                
+                <div class="staff-member">
+                    <img src="https://via.placeholder.com/150" alt="Гл.Администратор">
+                    <h3></h3>
+                    <div class="rank">Гл.Администратор</div>
+                    <p>Координирует работу всех отделов, отвечает за реализацию основных функций проекта.</p>
+                </div>
+                
+                <div class="staff-member">
+                    <img src="https://via.placeholder.com/150" alt="Зам.Гл. Администратора">
+                    <h3></h3>
+                    <div class="rank">Зам.Гл. Администратора</div>
+                    <p>Помощник главного администратора, курирует техническую часть проекта.</p>
+                </div>
+                
+                <div class="staff-member">
+                    <img src="https://via.placeholder.com/150" alt="Куратор администрации">
+                    <h3></h3>
+                    <div class="rank">Куратор администрации</div>
+                    <p>Контролирует работу администрации, проводит собеседования и обучение.</p>
+                </div>
+                
+                <div class="staff-member">
+                    <img src="https://via.placeholder.com/150" alt="Куратор форума">
+                    <h3></h3>
+                    <div class="rank">Куратор форума</div>
+                    <p>Отвечает за развитие форума, модерацию контента и взаимодействие с комьюнити.</p>
+                </div>
+                
+                <div class="staff-member">
+                    <img src="https://via.placeholder.com/150" alt="Старший администратор">
+                    <h3></h3>
+                    <div class="rank">Старший администратор</div>
+                    <p>Решает сложные спорные ситуации, имеет расширенные полномочия.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+
+
+      
+    
+    <!-- Вкладка Скачивания -->
+    <div id="download" class="tab-content">
+        <section class="container">
+            <h2>Скачать RIA RP</h2>
+            <p>Присоединяйтесь к нашему сообществу прямо сейчас! Выберите подходящую версию для загрузки.</p>
+            
+            <div style="text-align: center; margin: 50px 0;">
+                <a href="#" class="btn" onclick="downloadFile('https://drive.google.com/file/d/1RDMzLCJsRTMPJfBeQqGObN3hXPvtGQdI/view?usp=drive_link', 'RiaRolePlay')"  style="font-size: 1.3rem; padding: 20px 40px;">Скачать клиент RIA RP v1.0.0</a>
+                <p style="margin-top: 20px; font-size: 1.1rem;">
+                   
+                   <script>
+                        function downloadFile(url, filename) {
+                            const a = document.createElement('a');
+                            a.href = url;
+                            a.download = filename || '';
+                            document.body.appendChild(a);
+                            a.click();
+                            document.body.removeChild(a);
+                        }
+                    </script>
+                    </p>
+            </div>
+            
+            <h3>Системные требования</h3>
+            <div class="requirements">
+                <div class="requirement-card">
+                    <h3>Минимальные</h3>
+                    <ul class="requirement-list">
+                        <li>Операционная система: Microsoft Windows 2000 и XP</li>
+                        <li>Процессор: Pentium III или AMD Athlon, с тактовой частотой 1 ГГц</li>
+                        <li>Оперативная память (Гб): 4 Гб</li>
+                        <li>Видеокарта: с 64 МБ видеопамяти (Geforce 3 или лучше)</li>
+                        <li>Свободное место на HDD (Гб): 5 Гб</li>
+                    </ul>
+                </div>
+                
+                <div class="requirement-card">
+                    <h3>Рекомендуемые</h3>
+                    <ul class="requirement-list">
+                        <li>Операционная система: Intel Pentium 4 или AMD Athlon XP</li>
+                        <li>Видеокарта: со 128 и более МБ видеопамяти (рекомендуется GeForce 6 серии)</li>
+                        <li>Оперативная память (Гб): 8 Гб</li>
+                        <li>Свободное место на HDD (Гб): 8 Гб</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3>Инструкция по установке</h3>
+            <div class="feature" style="margin: 30px 0;">
+                <ol style="padding-left: 20px;">
+                    <li>Скачайте установочный файл</li>
+                    <li>Запустите установщик от имени администратора</li>
+                    <li>Следуйте инструкциям мастера установки</li>
+                    <li>После установки запустите лаунчер</li>
+                    <li>Введите свои учетные данные</li>
+                    <li>Наслаждайтесь игрой!</li>
+                </ol>
+            </div>
+            
+            <div class="forum-rules">
+                <h3>Перед установкой</h3>
+                <ul style="padding-left: 20px;">
+                    <li>Убедитесь, что у вас есть стабильное интернет-соединение</li>
+                    <li>Закройте все ненужные программы</li>
+                    <li>Отключите антивирус на время установки (если возникают проблемы)</li>
+                    <li>Имейте не менее 20GB свободного места на диске</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Подвал сайта -->
+    <footer>
+        <div class="footer-content">
+            <img src="ria.jpg" alt="Логотип RIA RP" style="max-width: 150px; margin-bottom: 20px;">
+            
+            <div class="footer-links">
+                <a href="#" onclick="showTab('main')">Главная</a>
+                <a href="#" onclick="showTab('administration')">Администрация</a>
+                
+                <a href="#" onclick="showTab('download')">Скачать</a>
+                
+                
+                
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 RIA RP. Все права защищены.</p>
+                <p>Это независимый проект и не связан с Rockstar Games.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Функция для переключения вкладок
+        function showTab(tabId) {
+            // Скрываем все вкладки
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Показываем выбранную вкладку
+            document.getElementById(tabId).classList.add('active');
+            
+            // Прокручиваем страницу вверх
+            window.scrollTo(0, 0);
+            
+            // Обновляем URL без перезагрузки страницы
+            history.pushState(null, null, `#${tabId}`);
+
+}
+        
+        // При загрузке страницы проверяем хэш в URL
+        window.addEventListener('DOMContentLoaded', () => {
+            const hash = window.location.hash.substring(1);
+            if (hash) {
+                showTab(hash);
+            }
+        });
+    </script>
+</body>
+</html>
